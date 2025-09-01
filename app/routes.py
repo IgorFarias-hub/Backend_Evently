@@ -3,9 +3,15 @@ from app import app, db
 from app.models import Guest
 from app.forms import GuestForm
 
-# Página inicial (formulário)
-@app.route("/", methods=["GET", "POST"])
-def index():
+# Página inicial 
+
+@app.route("/")
+def home():
+    return render_template("home.html", title="Início")
+
+# Cadastro de convidados
+@app.route("/cadastro", methods=["GET", "POST"])
+def cadastro():
     form = GuestForm()
     if form.validate_on_submit():
         nome = form.nome.data.strip()
@@ -14,14 +20,14 @@ def index():
         # Verifica duplicado
         if Guest.query.filter_by(email=email).first():
             flash("Este e-mail já está cadastrado!", "danger")
-            return redirect(url_for("index"))
+            return redirect(url_for("cadastro"))
 
         guest = Guest(nome=nome, email=email)
         db.session.add(guest)
         db.session.commit()
         flash("Convidado cadastrado com sucesso!", "success")
-        return redirect(url_for("index"))
-    return render_template("index.html", title="Lista de Convidados", form=form)
+        return redirect(url_for("cadastro"))
+    return render_template("cadastro.html", title="Cadastro de Convidados", form=form)
 
 # Listagem de convidados
 @app.route("/convidados")

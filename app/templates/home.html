@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center">
+  <div class="card shadow-lg p-5">
+    <h1 class="display-5 mb-3">🎉 Bem-vindo à Lista de Convidados</h1>
+    <p class="lead text-muted">Organize e acompanhe seus convidados de forma simples e prática.</p>
+    <hr class="my-4">
+    <a href="{{ url_for('cadastro') }}" class="btn btn-primary btn-lg me-2">➕ Cadastrar Convidado</a>
+    <a href="{{ url_for('convidados') }}" class="btn btn-outline-dark btn-lg me-2">👥 Ver Convidados</a>
+    <a href="{{ url_for('confirmados') }}" class="btn btn-success btn-lg">✅ Confirmados</a>
+  </div>
+</div>
+{% endblock %}

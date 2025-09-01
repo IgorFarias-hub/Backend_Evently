@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Convidados Confirmados</h2>
-<ul>
+<h2 class="mb-3">Convidados Confirmados</h2>
+<ul class="list-group shadow-sm">
 {% for g in convidados %}
-  <li>{{ g.nome }} — {{ g.email }}</li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    {{ g.nome }}
+    <span class="text-muted">{{ g.email }}</span>
+  </li>
+{% else %}
+  <li class="list-group-item">Nenhum confirmado ainda.</li>
 {% endfor %}
 </ul>
 {% endblock %}

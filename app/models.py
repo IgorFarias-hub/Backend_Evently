@@ -8,7 +8,8 @@ class Guest(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     confirmado = db.Column(db.Boolean, default=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    data_criacao = db.Column(db.DateTime, default=datetime.utcnow)
+
 
     def to_dict(self):
         return {
@@ -16,5 +17,5 @@ class Guest(db.Model):
             "nome": self.nome,
             "email": self.email,
             "confirmado": self.confirmado,
-            "created_at": self.created_at.isoformat()
+            "data_criacao": self.data_criacao.isoformat() if self.data_criacao else None
         }

@@ -7,6 +7,7 @@
       <th>Nome</th>
       <th>E-mail</th>
       <th>Status</th>
+      <th>Ações</th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,26 @@
         {% else %}
           <span class="badge bg-secondary">Pendente</span>
         {% endif %}
+      </td>
+      <td>
+        {% if not g.confirmado %}
+          <form action="{{ url_for('confirmar_id', id=g.id) }}" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-sm btn-primary">Confirmar</button>
+          </form>
+        {% else %}
+          <button class="btn btn-sm btn-success" disabled>Já Confirmado</button>
+        {% endif %}
+
+        <!-- Botão Editar -->
+        <a href="{{ url_for('editar_convidado', id=g.id) }}" class="btn btn-sm btn-warning">Editar</a>
+
+        <!-- Botão Deletar -->
+        <form action="{{ url_for('deletar_convidado', id=g.id) }}" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-sm btn-danger"
+                  onclick="return confirm('Tem certeza que deseja excluir este convidado?');">
+            Deletar
+          </button>
+        </form>
       </td>
     </tr>
   {% endfor %}

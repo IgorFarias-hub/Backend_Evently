@@ -5,4 +5,4 @@ from wtforms.validators import DataRequired, Email
 class GuestForm(FlaskForm):
     nome = StringField("Nome", validators=[DataRequired()])
     email = StringField("E-mail", validators=[DataRequired(), Email()])
-    submit = SubmitField("Confirmar Presença")
+    submit = SubmitField("Cadastrar")
